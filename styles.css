@@ -1,0 +1,680 @@
+:root{
+    --red: #dc0a2d;
+    --dark-red: #8d051d;
+    --green: #5CB26A;
+    --dk-teal: #002e2b;
+    --light-blue: #a0d8f8;
+    --blue: #29aafd;
+    --dk-blue: #3c5aa6;
+    --yellow: #f6b900;
+    --dk-yellow: #a18d14;
+    --silver: #dedede;
+    --black: #141414;
+    --white: #fff;
+    --pure-black: #000;
+
+    --button: #f6b900;
+    --button-hover: #e2aa00;
+
+    --button-alt: #a0d8f8;
+    --button-alt-hover: #29aafd;
+
+    --tab-disabled: #ddd;
+    --light-grey: #a6a6a6;
+    --font: "Press Start 2P", system-ui;
+    --alt-font: "Jersey 25", sans-serif;
+
+}
+
+
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/* Hidden content for screen reader users - code from: https://webaim.org/techniques/css/invisiblecontent/ */
+.sr-only {
+	position: absolute;
+	left: -10000px;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+/* styles for the autocompelte function */
+.ui-autocomplete {
+    list-style: none;
+    padding: 1rem 0;
+    text-transform: capitalize;
+}
+
+
+body {
+    font-family: var(--font);
+}
+
+header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem;
+    max-width: 1000px;
+    justify-items: stretch;
+    margin: 0 auto;
+}
+
+#pokeSearch {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: center;
+    position: relative;
+    justify-items: end;
+}
+
+#searchLabel {
+    grid-column: 1/-1;
+    font-size: 1rem;
+    font-family: var(--font);
+}
+
+#searchLabel span {
+    font-size: 0.5rem;
+    color: var(--silver);
+}
+
+
+#pokemon {
+    width: 450px;
+    font-family: var(--font);
+    display: block;
+    margin: 0.25em;
+    padding: 0 0.25rem;
+    height: 2em;
+    font-size: 1em;
+    border: none;
+    border-bottom: 1px solid var(--silver);
+}
+
+.error-input {
+    outline: 1px solid var(--red);
+}
+
+/* #pokemon-error {
+    position: absolute;
+    bottom: -4px;
+    left: 4px;
+    font-size: 0.5rem;
+    color: var(--red);
+} */
+
+#searchBtn {
+    font-family: var(--font);
+    padding: 0.25rem;
+    margin: 0.25em;
+    position: absolute;
+    background: none;
+    border: none;
+    top: 25px;
+    font-size: 1.25rem;
+    color: var(--silver);
+}
+
+#searchBtn:hover {
+    color: var(--black);
+}
+
+.ui-menu {
+    font-family: var(--font);
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.ui-menu .ui-menu-item-wrapper {
+    padding: 1rem 0.5rem;
+}
+
+#pokedex {
+    background-color: var(--red);
+    display: grid;
+    grid-template-columns: 4fr 0.25fr 4fr;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#pokeViewer {
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    align-items: start;
+    min-width: 300px;
+    margin-top: 25%;
+}
+
+/* top of the pokedex with the camera and lights styles */
+#topBarWrapper{
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    top: 0;
+    left: -4px;
+    gap: 4px;
+}
+
+#cameraAndLights{
+    display: grid;
+    grid-template-columns: max-content repeat(3, min-content);
+    align-content: center;
+    position: absolute;
+    z-index: 2;
+    left: 1%;
+    top: 10%;
+    height: 70%;
+    width: 25%;
+}
+
+#pokeViewer svg {
+    height: 100%;
+    margin-left: -0.15rem;
+    width: 102%;
+    z-index: 1;
+}
+
+/* move this to the right spot late TODO */
+#cutOut {
+    display: flex;
+    align-items: flex-start;
+    height: 100px;
+    margin-right: -4px;
+}
+#cutOut svg {
+    width: 100%;
+    margin-right: -0.15rem;
+}
+
+/* class for all orbs on the page */
+.orb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 3px solid var(--black);
+    margin: 0 0.15rem;
+    box-shadow: inset 0 0 4px 0 var(--silver);
+}
+
+.orb::after {
+    content: " ";
+    width: 6px;
+    height: 6px;
+    display: block;
+    background: var(--white);
+    border-radius: 50%;
+    margin: 3px 0 0 4px;
+    opacity: 0.6;
+}
+
+#cameraOrb {
+    width: 75px;
+    height: 75px;
+    background-color: var(--blue);
+    border: 5px solid white;
+    box-shadow: inset 0 0 0 1px var(--black), 
+    inset 0 0 14px 1px var(--silver);
+}
+
+#cameraOrb::after{
+    content: " ";
+    width: 20px;
+    height: 20px;
+    display: block;
+    position: absolute;
+    background: var(--white);
+    top: 10px;
+    left: 20px;
+    border-radius: 50%;
+    opacity: 0.6;
+    margin: 0;
+    box-shadow: 6px 8px 6px 13px var(--light-blue), 
+    10px 16px 1px 22px var(--dk-teal);
+}
+
+#redOrb{
+    background-color: var(--red);
+}
+#yellowOrb{
+    background-color: var(--yellow);
+}
+#greenOrb {
+    background-color: var(--green);
+}
+
+/* sprite viewer styles */
+#spriteViewer {
+    background-color: var(--black);
+    height: 350px;
+    width: 80%;
+    min-width: 250px;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    border: 16px solid var(--silver);
+    border-bottom-left-radius: 70px;
+}
+
+#slickContainer {
+    width: 100%;
+    max-height: 350px;
+    background-image: url(grass1.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.slick-slide {
+    display: flex !important;
+    justify-content: center;
+}
+
+.slick-slide img {
+    margin-bottom: 52px;
+    margin-top: calc(100% / 2);
+    height: 96px;
+}
+
+.slick-dots li button .slick-dot-icon {
+    color: var(--silver) !important;
+}
+
+/* change the color of the dot when it is clicked from orange to blue */
+.slick-dots li button:focus .slick-dot-icon:before {
+    color: var(--light-blue);
+}
+
+
+#sprites{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#prev, #next {
+    padding: 1rem;
+    background: none;
+    border: none;
+    color: var(--silver);
+    font-size: 1.5rem;
+}
+
+#prev:hover, #next:hover{
+    color: var(--light-blue);
+}
+
+#prev:disabled, #next:disabled{
+    visibility: hidden;
+}
+
+#sprites figcaption {
+    color: var(--silver);
+    width: 7ch;
+    text-align: center;
+    font-size: 0.75rem;
+    text-transform: capitalize;
+}
+
+
+
+/* styles for the action buttons */
+#actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    height: 150px;
+}
+
+#actions button {
+    padding: 1.15rem;
+    width: 150px;
+    height: 75px;
+    font-family: var(--alt-font);
+    font-weight: 900;
+    font-size: 1.5rem;
+    border: 3px outset var(--black);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 3px 1px 2px var(--black);
+}
+/* hover styles for all the buttons */
+#actions button:hover {
+    border: 3px inset var(--black);
+    box-shadow: inset 1px 3px 1px 2px var(--black);
+}
+
+#view, #team {
+    background: var(--button);
+}
+
+#view:hover,
+#team:hover {
+    background: var(--button-hover);
+}
+
+#save {
+    background: var(--button-alt);
+}
+
+#save:hover {
+    background: var(--button-alt-hover);
+}
+
+#team, #view {
+    /* force view last and view team button to always be on the right side */
+    /* when save button is not visible */
+    grid-column: 2/3;
+}
+
+
+
+
+/* seperator/hinge styles */
+#seperator {
+    background-color: #eb032c;
+    margin: 0;
+    padding: 1rem;
+    position: relative;
+    z-index: 2;
+    border: 1px solid var(--dark-red);
+    background-image: linear-gradient(to right, transparent 10%, #dedede96 35%, transparent 60%, transparent),
+    linear-gradient(to bottom, transparent 10%, var(--dark-red) 10%, var(--dark-red) 11%, transparent 11%, transparent 90%, var(--dark-red) 90%, var(--dark-red) 91%, transparent 91%, transparent);
+}
+
+
+/* styles for the info screen */
+#pokeInfo, #pokeList, #error {
+    background-color: var(--green);
+    padding: 1rem 0.5rem;
+    margin: 1rem;
+    position: relative;
+    min-width: 300px;
+    margin-top: 25%;
+    border: 8px solid var(--black);
+    display: flex;
+    flex-direction: column;
+    height: 550px;
+    overflow: auto;
+
+    scrollbar-color: var(--black) transparent;
+}
+
+#name, #type {
+    text-transform: capitalize;
+}
+
+#type {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#type span {
+    padding: 0.5rem;
+    color: var(--white);
+}
+
+#number {
+    position: absolute;
+    top: 4px;
+    right: 10px;
+    font-size: 2rem;
+    font-family: var(--alt-font);
+    padding: 0;
+    margin: 0;
+}
+
+p:has(#name) {
+    font-size: 1.25rem;
+    display: flex;
+    gap: 1rem;
+}
+
+/* stats section styles */
+#stats{
+    background: var(--silver);
+    padding: 0.25rem 0.5rem;
+}
+
+#stats h3,
+#abilities h3 {
+    padding: 0 0.75rem 0.5rem;
+    margin: 1rem 0 0;
+}
+
+.stat {
+    font-family: var(--alt-font);
+    background-color: var(--tab-disabled);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+}
+
+dl {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+
+/* abilities section styles */
+#abilities {
+    background-color: var(--silver);
+    padding: 0.15rem 0.5rem;
+    margin: 1rem 0 0 0;
+    text-transform: capitalize;
+}
+
+#tabs {
+    font-family: var(--alt-font);
+    background: none;
+    border: none;
+}
+
+#tabs ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    background: var(--tab-disabled);
+    border: none;
+    margin-right: 1px;
+}
+
+#tabs li {
+    background-color: var(--tab-disabled);
+    border: none;
+    display: flex;
+    align-items: center;
+}
+
+#tabs li a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--black);
+    padding: 0.5rem;
+    font-size: 1.25rem;
+}
+
+#tabs div {
+    font-size: 1.25rem;
+    border: 1px solid var(--black);
+    text-transform: lowercase;
+    height: 150px;
+    background-color: var(--white);
+    padding: 1em 0.5em;
+}
+
+/* force sentence case for ability description */
+#tabs div::first-letter {
+    text-transform: uppercase;
+}
+
+
+
+/* styles for the active tab, important set to override styles above */
+#tabs .ui-state-active {
+    background-color: var(--white) !important;
+    border: 1px solid var(--black) !important;
+    border-bottom: 1px solid var(--white) !important;
+    margin-top: -1px !important;
+}
+
+
+
+/* TEAM VIEW/POKEMON LIST STYLES */
+
+#list {
+    margin: 0;
+    padding: 0;
+}
+
+.pokemon-list-item {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+    border: 2px solid var(--black);
+    text-transform: capitalize;
+    background-color: var(--tab-disabled);
+}
+
+.pokemon-list-item a {
+    text-decoration: none;
+    color: var(--pure-black);
+}
+
+.pokemon-list-item a:hover {
+    color: var(--dk-blue);
+    
+}
+
+.delete {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+}
+
+.delete:hover {
+    color: var(--red);
+}
+
+
+/* ERROR STATE STYLES */
+.view-error-code{
+    position: relative;
+    display: grid;
+    grid-template-rows: 1fr 0.5fr;
+    justify-items: center;
+    height: 100%;
+}
+
+.view-error-code h1 {
+    margin: 0;
+    color: var(--silver);
+    width: 6ch;
+    text-align: center;
+    grid-row: 2/3;
+    font-size: 1rem;
+}
+
+.status-code {
+    font-family: var(--alt-font);
+    font-size: 5rem;
+    color: var(--red);
+    margin: 5.5rem 0.5rem 1rem 0;
+}
+
+
+#error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#errorText{
+    font-size: 0.75rem;
+}
+
+.error-input-text {
+    position: absolute;
+    bottom: 0;
+    right: 85px;
+    font-size: 0.5rem;
+    color: var(--silver);
+}
+
+.pokeball {
+    height: 200px;
+    width: 200px;
+    background: var(--red);
+    border-radius: 50%;
+    border: 6px solid var(--pure-black);
+    background-image: 
+        radial-gradient(var(--white) 15%, var(--white) 15%, var(--pure-black) 15%, var(--pure-black) 25%, transparent 25%, transparent),
+        linear-gradient(var(--red) 46%, var(--pure-black) 46%, var(--pure-black) 54%, var(--white) 54%);
+}
+
+
+.jconfirm-holder {
+    width: 500px;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+
+/* TO DO: add more mobile and tablet styles */
+
+/* styles for smaller than desktop */
+@media (max-width: 1000px){
+    #cameraAndLights {
+        top: 0%;
+    }
+    .orb {
+        width: 20px;
+        height: 20px;
+    }
+    .orb::after{
+        margin: 1px 0 0 3px;
+    }
+    #cameraOrb {
+        width: 55px;
+        height: 55px;
+    }
+    #cameraOrb::after {
+        width: 10px;
+        height: 10px;
+        top: 18px;
+        left: 25px;
+        box-shadow: 0px 7px 5px 11px var(--light-blue), 
+        2px 13px 5px 17px var(--dk-teal);
+    }
+
+    #tabs {
+        font-size: 2vw;
+    }
+
+    #tabs li a {
+        font-size: 1.1em;
+    }
+
+}

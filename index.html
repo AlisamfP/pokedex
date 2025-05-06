@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- press start 2p, jersey25 font from google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+25&family=Press+Start+2P" rel="stylesheet">
+
+    <!-- Jquery UI CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/themes/base/jquery-ui.min.css">
+
+    <!-- Add the core slick.min.css -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/slick.min.css">
+
+    <!-- Add accessible theme file for slick -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/accessible-slick-theme.min.css">
+
+    <!-- adding jquery confirm plugin -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    
+    <!-- adding Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+    <!-- adding slick -->
+    <script src="https://cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/slick.min.js"></script>
+    <!-- adding confirm -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+    <!-- adding font awesome for icons -->
+    <script src="https://kit.fontawesome.com/5494ad84e2.js" crossorigin="anonymous"></script>
+
+
+    <script src="obfuscated.js" defer></script>
+
+    <title>Pokédex</title>
+</head>
+
+<body>
+    <header>
+        <h1>Pokédex</h1>
+        <form id="pokeSearch">
+            <div class="ui-widget">
+                <label for="pokemon" id="searchLabel">Enter Pokémon<span>(name or number)</span></label>
+                <input required type="text" id="pokemon" placeholder="Pikachu">
+            </div>
+            <span class="error-input-text"></span>
+            <button id="searchBtn" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </header>
+    <main>
+        <section id="pokedex">
+            <h2 class="sr-only">Pokémon Information</h2>
+            <div id="topBarWrapper">
+                <div id="cameraAndLights">
+                    <div class="orb" id="cameraOrb"></div>
+                    <div class="orb" id="redOrb"></div>
+                    <div class="orb" id="yellowOrb"></div>
+                    <div class="orb" id="greenOrb"></div>
+                </div>
+                <svg viewBox="0 0 508 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_d_1_125)">
+                        <path d="M350.815 38.5H504V0H4V93H134.435C217.347 93 233.697 41.6532 350.815 38.5Z"
+                            fill="#757575" />
+                    </g>
+                    <defs>
+                        <filter id="filter0_d_1_125" x="0" y="0" width="508" height="101"
+                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                            <feOffset dy="4" />
+                            <feGaussianBlur stdDeviation="2" />
+                            <feComposite in2="hardAlpha" operator="out" />
+                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_125" />
+                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_125"
+                                result="shape" />
+                        </filter>
+                    </defs>
+                </svg>
+                <div id="cutOut">
+                    <svg viewBox="0 0 490 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M153.185 38.5H0V0H500V93H369.565C286.653 93 270.303 41.6532 153.185 38.5Z" fill="white"/>
+                    </svg>                    
+                </div>
+            </div>
+            <div id="pokeViewer">
+                <div id="spriteViewer">
+                    <div id="slickContainer"></div>
+                </div>
+                <div id="actions">
+                    <button id="save">Add to Team</button>
+                    <button id="team">View Team</button>
+                    <button id="view">View Last Pokemon</button>
+                </div>
+                <div id="actionUpdate"></div>
+            </div>
+            <span id="seperator"></span>
+            <div id="pokeInfo">
+                <div id="about">
+                    <p id="number"></p>
+                    <p>Name: <span id="name"></span></p>
+                    <p id="type"></p>
+                </div>
+                <section id="stats">
+                    <h3>Stats</h3>
+                    <dl>
+                    </dl>
+                </section>
+                <section id="abilities">
+                    <h3>Abilities</h3>
+                </section>
+            </div>
+            <section id="pokeList">
+                <h2>Pokémon Team</h2>
+                <ul id="list"></ul>
+            </section>
+            <div id="error">
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+</body>
+
+</html>
